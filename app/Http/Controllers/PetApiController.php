@@ -14,8 +14,6 @@ class PetApiController extends Controller
     public function getPetById(Request $request)
     {
         $petId = $request->petId;
-        // $petData = PetModel::getPetById($petId);
-        // $petData = json_encode($petData);
         try {
             $petData = PetModel::getPetById($petId);
             $petData = json_encode($petData);
@@ -32,7 +30,6 @@ class PetApiController extends Controller
             $petData = json_encode(['error' => $errorMessage]);
             return view('showPet', compact('petData'))->render();
         }
-        // return view('showPet', compact('petData'))->render();
     }
     public function deletePet(Request $request)
     {
@@ -40,30 +37,22 @@ class PetApiController extends Controller
         try {
             PetModel::deletePet($petId);
 
-            // Jeżeli kod doszedł do tego miejsca, to oznacza, że nie było żadnego błędu
             $petData = "Correctly deleted pet";
             return view('showPet', compact('petData'))->render();
         } catch (\Exception $e) {
-            // Obsługa błędów z wyjątkiem
             $errorMessage = '';
 
             if ($e->getMessage() == 'Invalid ID supplied') {
-                // Obsługa błędu 400 - nieprawidłowe ID
                 $errorMessage = 'Invalid ID supplied';
             } elseif ($e->getMessage() == 'Pet not found') {
-                // Obsługa błędu 404 - zwierzę nie znalezione
                 $errorMessage = 'Pet not found';
             } else {
-                // Inny błąd
                 $errorMessage = 'Wystąpił błąd.';
             }
 
-            // Przypisz informacje o błędzie do zmiennej petData
             $petData = json_encode(['error' => $errorMessage]);
             return view('showPet', compact('petData'))->render();
         }
-        // PetModel::deletePet($petId);
-        // return redirect()->back()->with('success', 'succesfully deleted pet');
     }
 
     public function addNewPet(Request $request)
@@ -85,7 +74,6 @@ class PetApiController extends Controller
         ];
         $newPet = PetModel::addNewPet($data);
         $newPet = json_encode($newPet);
-        // dd($newPet);
         return view('showPet', compact('newPet'))->render();
     }
     public function readPetDataForUpdate(Request $request)
@@ -97,7 +85,6 @@ class PetApiController extends Controller
     public function updatePet(Request $request)
     {
         $petId = $request->petId;
-        // dd($petId);
         $data = [
             'id' => $request->petId,
             'category' => [
@@ -114,9 +101,7 @@ class PetApiController extends Controller
             ],
             'status' => $request->data['status'],
         ];
-        // dd($data);
         PetModel::updatePet($petId, $data);
-        // dd($updatePet);
         return redirect()->back()->with('success', 'succesfully deleted pet');
     }
 }

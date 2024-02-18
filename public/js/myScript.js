@@ -93,7 +93,7 @@ function fingPetDetails() {
 }
 
 function updatePet() {
-    var petId = $('#updatePetId').val(); // Popraw nazwę zmiennej
+    var petId = $('#updatePetId').val();
     var data = {
         // petId: $('updatePetId').val(),
         petName: $('#updateName').val(),

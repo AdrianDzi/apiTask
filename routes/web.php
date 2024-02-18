@@ -19,16 +19,11 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [PetApiController::class, 'index']);
-// Trasa dla getPetById
 Route::get('/pets', [PetApiController::class, 'getPetById']);
 
-// Trasa dla addNewPet (POST)
 Route::post('/addPets', [PetApiController::class, 'addNewPet']);
-
-// Trasa dla updatePet (PUT)
 
 Route::get('/updatePetsDetails', [PetApiController::class, 'readPetDataForUpdate']);
 Route::post('/updatePets', [PetApiController::class, 'updatePet']);
 
-// Trasa dla deletePet (DELETE)
 Route::post('/deletePet', [PetApiController::class, 'deletePet']);

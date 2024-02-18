@@ -21,17 +21,13 @@ class PetModel extends Model
             $statusCode = $response->status();
 
             if ($statusCode == 400) {
-                // Obsługa błędu 400 - nieprawidłowe ID
                 throw new \Exception('Invalid ID supplied');
             } elseif ($statusCode == 404) {
-                // Obsługa błędu 404 - zwierzę nie znalezione
                 throw new \Exception('Pet not found');
             } else {
-                // Inny błąd, rzucenie ogólnego wyjątku
                 throw new \Exception('Błąd zewnętrznego API: ' . $statusCode);
             }
         }
-        // return $petData;
     }
     public static function addNewPet($data)
     {
